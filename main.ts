@@ -1,4 +1,4 @@
-// main.ts for token-radar-01 entry (high-performance valuation engine)
+// main.ts for token-radar-01 entry (high-performance valuation engine v2.1)
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
