@@ -1,4 +1,5 @@
 // High-Performance Valuation and Alpha Discovery Model for token-radar-01 (v2.1 calibrated)
+import { computeMetrics } from './analytics.ts';
 // Maps frozen DefiLlama protocol universe into ranked implied valuation board and actionable airdrop strategies.
 
 export interface SnapshotProtocol {
@@ -142,6 +143,7 @@ export function ageDays(asOf: string, listedAt: string | null): number | null {
 
 export function impliedValue(protocol: SnapshotProtocol, asOf: string, model: ModelConstants): { implied: number; growthPct: number; growthMult: number; maturityMult: number; age: number | null } {
   const age = ageDays(asOf, protocol.listed_at);
+  const metrics = computeMetrics(protocol.tvl_usd, protocol.change_7d, age);
   const rawGrowth = finite(protocol.change_7d, 0);
   const growthPct = Math.min(model.growth_cap, Math.max(model.growth_floor, rawGrowth));
   const growthMult = 1 + (growthPct / 100) * model.growth_weight;
